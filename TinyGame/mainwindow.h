@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "Include.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,5 +18,11 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QMenu               *m_menu;
+
+private:
+    void setMainWindow();
+    void paintEvent(QPaintEvent *event);
+    void setMyMenu();
 };
 #endif // MAINWINDOW_H
