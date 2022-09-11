@@ -4,9 +4,9 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , m_menu(Q_NULLPTR)
 {
     ui->setupUi(this);
-    m_menu = Q_NULLPTR;
 
     setMainWindow();
     setMyMenu();
@@ -22,6 +22,9 @@ void MainWindow::setMainWindow()
     setFixedSize(390, 570);
     setWindowIcon(QIcon(":/res/Coin0001.png"));
     setWindowTitle("CoinFlip");
+
+    CMyPushbutton *pushbutton_start = new CMyPushbutton(this, ":/res/MenuSceneStartButton.png");
+    pushbutton_start->move(this->width() * 0.5 - pushbutton_start->width() * 0.5, this->height() * 0.7);
 }
 
 void MainWindow::paintEvent(QPaintEvent *event)
