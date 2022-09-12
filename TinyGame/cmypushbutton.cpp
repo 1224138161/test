@@ -36,19 +36,19 @@ CMyPushbutton::CMyPushbutton(QWidget *parent, QString imagePath, QString pressed
     this->setIcon(pix);
     this->setIconSize(pix.size());
 
-    connect(this, &CMyPushbutton::pressed, this, &CMyPushbutton::Zoom);
+    //connect(this, &CMyPushbutton::pressed, this, &CMyPushbutton::Zoom);
 }
 
 void CMyPushbutton::Zoom()
 {
     QPropertyAnimation *animation_zoom1 = new QPropertyAnimation(this, "geometry");
-    animation_zoom1->setDuration(200);
+    animation_zoom1->setDuration(20);
     animation_zoom1->setStartValue(this->geometry());
     animation_zoom1->setEndValue(QRect(this->x(), this->y() + 10, this->width(), this->height()));
     animation_zoom1->start();
 
     QPropertyAnimation *animation_zoom2 = new QPropertyAnimation(this, "geometry");
-    animation_zoom2->setDuration(200);
+    animation_zoom2->setDuration(20);
     animation_zoom2->setStartValue(QRect(this->x(), this->y() + 10, this->width(), this->height()));
     animation_zoom2->setEndValue(this->geometry());
     animation_zoom2->start();

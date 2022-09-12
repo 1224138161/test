@@ -25,6 +25,12 @@ void MainWindow::setMainWindow()
 
     CMyPushbutton *pushbutton_start = new CMyPushbutton(this, ":/res/MenuSceneStartButton.png");
     pushbutton_start->move(this->width() * 0.5 - pushbutton_start->width() * 0.5, this->height() * 0.7);
+
+    CChooseLevelScene *window_levelScene = new CChooseLevelScene();
+    connect(pushbutton_start, &CMyPushbutton::clicked, window_levelScene, [=](){
+        window_levelScene->show();
+        this->close();
+    });
 }
 
 void MainWindow::paintEvent(QPaintEvent *event)
