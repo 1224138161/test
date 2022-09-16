@@ -17,11 +17,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    MainWindow.cpp
+    MainWindow.cpp \
+    source/DiaryEditor.cpp \
+    source/DiaryListWnd.cpp
 
 HEADERS += \
     Include.h \
-    MainWindow.h
+    MainWindow.h \
+    header/DiaryEditor.h \
+    header/DiaryListWnd.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

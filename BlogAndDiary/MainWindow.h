@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "Include.h"
+#include "header/DiaryListWnd.h"
+#include "header/DiaryEditor.h"
 
 class cMainWindow : public QMainWindow
 {
@@ -11,7 +13,17 @@ class cMainWindow : public QMainWindow
 public:
     cMainWindow(QWidget *parent = nullptr);
     ~cMainWindow();
+private:
     void InitWnd();
     void InitMenu();
+    void resizeEvent(QResizeEvent *event);
+private:
+    QStackedWidget *m_stackedWnd;
+    QPushButton *m_blogListBtn;
+    QPushButton *m_diaryListBtn;
+    cDiaryListWnd *m_diaryListWnd;
+    cDiaryEditor *m_diaryEditorWnd;
+private slots:
+    void On_addDiary();
 };
 #endif // CMAINWINDOW_H
