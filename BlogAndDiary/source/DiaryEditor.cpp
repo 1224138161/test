@@ -42,15 +42,12 @@ void cDiaryEditor::InitWnd()
     hBottomLayout->addWidget(backBtn);
     hBottomLayout->addStretch();
     // END bottomWnd
-    m_textEdit->setFixedSize(width(), abs(height() - m_saveBtn->height() - 20));
 
     vMainLayout->addWidget(m_textEdit);
     vMainLayout->addWidget(bottomWnd);
-    vMainLayout->addStretch();
 }
 
 void cDiaryEditor::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event);
-    m_textEdit->setFixedSize(width(), abs(height() - m_saveBtn->height() - 20));
 }

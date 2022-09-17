@@ -19,6 +19,7 @@ private:
     void resizeEvent(QResizeEvent *event);
 private:
     QStackedWidget *m_stackedWnd;
+    QWidget *m_mainWnd;
     QPushButton *m_blogListBtn;
     QPushButton *m_diaryListBtn;
     cDiaryListWnd *m_diaryListWnd;
