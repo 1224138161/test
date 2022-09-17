@@ -26,5 +26,7 @@ private:
     cDiaryEditor *m_diaryEditorWnd;
 private slots:
     void On_addDiary();
+    void On_back();
+    void On_save();
 };
 #endif // CMAINWINDOW_H

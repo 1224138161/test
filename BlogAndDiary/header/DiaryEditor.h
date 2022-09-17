@@ -17,6 +17,7 @@ private:
     QPushButton *m_saveBtn;
 signals:
     void Sig_back();
+    void Sig_save();
 };
 
 #endif // CDIARYEDITOR_H

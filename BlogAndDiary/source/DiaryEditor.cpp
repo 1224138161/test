@@ -25,6 +25,9 @@ void cDiaryEditor::InitWnd()
     m_saveBtn = new QPushButton("save", bottomWnd);
     m_saveBtn->setStyleSheet("border: none; background-color: rgb(215,205,188);");
     m_saveBtn->setFixedSize(100, 50);
+    connect(m_saveBtn, &QPushButton::clicked, this, [=](){
+        emit Sig_save();
+    });
     // readFileBtn
     QPushButton *readFileBtn = new QPushButton("read file", bottomWnd);
     readFileBtn->setStyleSheet("border: none; background-color: rgb(133,116,116);");
@@ -33,7 +36,9 @@ void cDiaryEditor::InitWnd()
     QPushButton *backBtn = new QPushButton("back", bottomWnd);
     backBtn->setStyleSheet("border: none; background-color: rgb(187,174,159);");
     backBtn->setFixedSize(100, 50);
-    connect(backBtn, &QPushButton::clicked, this, &cDiaryEditor::Sig_back);
+    connect(backBtn, &QPushButton::clicked, this, [=](){
+        emit Sig_back();
+    });
 
     hBottomLayout->addWidget(m_saveBtn);
     hBottomLayout->addSpacing(5);

@@ -14,5 +14,11 @@
 #include <QEvent>
 #include <QLabel>
 #include <QTimer>
+#include <QFile>
+#include <QDir>
+
+#define PATH_DATA   "./data"
+#define PATH_BLOG   "./data/blog"
+#define PATH_DIARY  "./data/diary"
 
 #endif // INCLUDE_H
