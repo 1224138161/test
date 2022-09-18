@@ -10,17 +10,31 @@ CChooseLevelScene::CChooseLevelScene(QWidget *parent) : QMainWindow(parent)
 
 void CChooseLevelScene::Init()
 {
-    setFixedSize(390, 570);
+    setFixedSize(320, 588);
     setWindowIcon(QIcon(":/res/Coin0001.png"));
     setWindowTitle("Select Level");
 
     pushbutton_back = new CMyPushbutton(this, ":/res/BackButton.png", ":/res/BackButtonSelected.png");
     pushbutton_back->move(this->width() - pushbutton_back->width(), this->height() - pushbutton_back->height());
-    connect(pushbutton_back, &CMyPushbutton::clicked, this, &CChooseLevelScene::close);
+    connect(pushbutton_back, &CMyPushbutton::clicked, this, [=](){
+        emit Sig_back();
+    });
+
+    for (int i = 0; i < 20; i++)
+    {
+        CMyPushbutton *stageBtn = new CMyPushbutton(this, ":/res/LevelIcon.png");
+        stageBtn->move(25 + i % 4 * 70, 130 + i / 4 * 70);
+
+        QLabel *stageLab = new QLabel(QString::number(i + 1) ,this);
+        stageLab->setGeometry(stageBtn->geometry());
+        stageLab->setAlignment(Qt::AlignCenter);
+        stageLab->setAttribute(Qt::WA_TransparentForMouseEvents);
+    }
 }
 
 void CChooseLevelScene::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event);
     QPainter painter(this);
     QPixmap pix;
     pix.load(":/res/OtherSceneBg.png");

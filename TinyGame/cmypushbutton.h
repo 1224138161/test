@@ -2,8 +2,7 @@
 #define CMYPUSHBUTTON_H
 
 #include <QPushButton>
-#include <QDebug>
-#include <QPropertyAnimation>
+#include "Include.h"
 
 class CMyPushbutton : public QPushButton
 {
@@ -11,8 +10,10 @@ class CMyPushbutton : public QPushButton
 public:
     CMyPushbutton(QString imagePath, QString pressedImagePath = "");
     CMyPushbutton(QWidget *parent, QString imagePath, QString pressedImagePath = "");
-private:
     void Zoom();
+private:
+    void mousePressEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
 private:
     QString m_imagePath;
     QString m_pressedImagePath;

@@ -5,5 +5,7 @@
 #include <QPropertyAnimation>
 #include <QMenuBar>
 #include <QDebug>
+#include <QLabel>
+#include <QTimer>
 
 #endif // INCLUDE_H

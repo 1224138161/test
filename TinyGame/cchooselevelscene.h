@@ -20,7 +20,7 @@ private:
     QMenu               *m_menu;
     CMyPushbutton       *pushbutton_back;
 signals:
-
+    void Sig_back();
 };
 
 #endif // CCHOOSELEVELSCENE_H
