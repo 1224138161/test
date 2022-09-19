@@ -13,6 +13,7 @@ private:
     void InitWnd();
     void resizeEvent(QResizeEvent *event);
 private:
+    QWidget *m_listWnd;
     QPushButton *m_addDiaryBtn;
 signals:
     void Sig_addDiary();

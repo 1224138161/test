@@ -132,10 +132,11 @@ void cMainWindow::On_back()
 
 void cMainWindow::On_save()
 {
-    QDir qDirPath(PATH_DIARY);
+    QString qStrPath = QDir::currentPath() + PATH_DIARY;
+    QDir qDirPath(qStrPath);
     if (!qDirPath.exists())
     {
-        qDirPath.mkpath(PATH_DIARY);
+        qDirPath.mkpath(qStrPath);
     }
 }
 
