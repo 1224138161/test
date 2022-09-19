@@ -107,7 +107,6 @@ void cMainWindow::On_addDiary()
     {
         m_diaryEditorWnd = new cDiaryEditor(this);
         connect(m_diaryEditorWnd, &cDiaryEditor::Sig_back, this, &cMainWindow::On_back);
-        connect(m_diaryEditorWnd, &cDiaryEditor::Sig_save, this, &cMainWindow::On_save);
 
         m_stackedWnd->addWidget(m_diaryEditorWnd);
         m_stackedWnd->setCurrentWidget(m_diaryEditorWnd);
@@ -129,15 +128,3 @@ void cMainWindow::On_back()
         m_stackedWnd->setCurrentWidget(m_mainWnd);
     }
 }
-
-void cMainWindow::On_save()
-{
-    QString qStrPath = QDir::currentPath() + PATH_DIARY;
-    QDir qDirPath(qStrPath);
-    if (!qDirPath.exists())
-    {
-        qDirPath.mkpath(qStrPath);
-    }
-}
-
-
