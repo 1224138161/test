@@ -3,6 +3,8 @@
 CChooseLevelScene::CChooseLevelScene(QWidget *parent) : QMainWindow(parent)
     , m_menuBar(Q_NULLPTR)
     , m_menu(Q_NULLPTR)
+    , pushbutton_back(Q_NULLPTR)
+    , m_playScene(Q_NULLPTR)
 {
     Init();
     SetMyMenu();
@@ -24,6 +26,18 @@ void CChooseLevelScene::Init()
     {
         CMyPushbutton *stageBtn = new CMyPushbutton(this, ":/res/LevelIcon.png");
         stageBtn->move(25 + i % 4 * 70, 130 + i / 4 * 70);
+        connect(stageBtn, &CMyPushbutton::clicked, this, [=](){
+            m_playScene = new cPlayScene(this, i + 1);
+            m_playScene->setGeometry(geometry());
+            m_playScene->show();
+            hide();
+            connect(m_playScene, &cPlayScene::Sig_back, this, [=](){
+                setGeometry(m_playScene->geometry());
+                show();
+                delete m_playScene;
+                m_playScene = Q_NULLPTR;
+            });
+        });
 
         QLabel *stageLab = new QLabel(QString::number(i + 1) ,this);
         stageLab->setGeometry(stageBtn->geometry());

@@ -5,6 +5,7 @@
 #include <QWidget>
 #include "Include.h"
 #include "cmypushbutton.h"
+#include "PlayScene.h"
 
 class CChooseLevelScene : public QMainWindow
 {
@@ -19,6 +20,7 @@ private:
     QMenuBar            *m_menuBar;
     QMenu               *m_menu;
     CMyPushbutton       *pushbutton_back;
+    cPlayScene          *m_playScene;
 signals:
     void Sig_back();
 };

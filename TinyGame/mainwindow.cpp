@@ -44,6 +44,7 @@ void MainWindow::setMainWindow()
 
 void MainWindow::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event);
     QPainter painter(this);
     QPixmap pix;
     pix.load(":/res/PlayLevelSceneBg.png");
