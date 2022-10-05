@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "Include.h"
 #include "cmypushbutton.h"
+#include "CoinBtn.h"
+#include "DataConfig.h"
 
 class cPlayScene : public QMainWindow
 {
@@ -19,6 +21,7 @@ private:
     QMenu               *m_menu;
     CMyPushbutton       *m_backBtn;
     int m_levelIndex;
+    int m_arr[4][4];
 signals:
     void Sig_back();
 };

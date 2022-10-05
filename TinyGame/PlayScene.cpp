@@ -2,7 +2,7 @@
 
 cPlayScene::cPlayScene(QWidget *parent, int level)
 {
-    setGeometry(parent->geometry());
+    setFixedSize(parent->size());
     m_levelIndex = level;
     Init();
     SetMyMenu();
@@ -27,6 +27,39 @@ void cPlayScene::Init()
     levelLab->setFont(font);
     levelLab->setGeometry(30, height() - 50, 120, 50);
     levelLab->setText(qStrText);
+
+    cDataConfig dataConfig;
+    if (dataConfig.m_data.find(m_levelIndex) == dataConfig.m_data.end())
+    {
+        return;
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            m_arr[i][j] = dataConfig.m_data[m_levelIndex][i][j];
+        }
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            QLabel *coinBgLab = new QLabel(this);
+            coinBgLab->setGeometry(57 + i * 50, 200 + j * 50, 50, 50);
+            coinBgLab->setPixmap(QPixmap(":/res/BoardNode.png"));
+
+            cCoinBtn *coinBtn = new cCoinBtn(this);
+            if(m_arr[i][j])
+            {
+                coinBtn->SetPix(":/res/Coin0001.png");
+            }
+            else
+            {
+                coinBtn->SetPix(":/res/Coin0008.png");
+            }
+            coinBtn->setGeometry(59 + i * 50, 204 + j * 50, 50, 50);
+        }
+    }
 }
 
 void cPlayScene::SetMyMenu()

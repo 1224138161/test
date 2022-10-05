@@ -16,6 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    CoinBtn.cpp \
+    DataConfig.cpp \
     PlayScene.cpp \
     cchooselevelscene.cpp \
     cmypushbutton.cpp \
@@ -23,6 +25,8 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    CoinBtn.h \
+    DataConfig.h \
     Include.h \
     PlayScene.h \
     cchooselevelscene.h \

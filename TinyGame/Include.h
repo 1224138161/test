@@ -7,5 +7,7 @@
 #include <QDebug>
 #include <QLabel>
 #include <QTimer>
+#include <QVector>
+#include <QMap>
 
 #endif // INCLUDE_H
