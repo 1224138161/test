@@ -1,6 +1,7 @@
 #include "PlayScene.h"
 
 cPlayScene::cPlayScene(QWidget *parent, int level)
+    : m_isWin(false)
 {
     setFixedSize(parent->size());
     m_levelIndex = level;
@@ -13,6 +14,9 @@ void cPlayScene::Init()
     setWindowIcon(QIcon(":/res/Coin0001.png"));
     QString qStrText = QString("Level %1").arg(m_levelIndex);
     setWindowTitle(qStrText);
+
+    QSound* winSound = new QSound(":/res/LevelWinSound.wav", this);
+    QSound* conflipSound = new QSound(":/res/ConFlipSound.wav", this);
 
     m_backBtn = new CMyPushbutton(this, ":/res/BackButton.png", ":/res/BackButtonSelected.png");
     m_backBtn->move(this->width() - m_backBtn->width(), this->height() - m_backBtn->height());
@@ -27,6 +31,13 @@ void cPlayScene::Init()
     levelLab->setFont(font);
     levelLab->setGeometry(30, height() - 50, 120, 50);
     levelLab->setText(qStrText);
+
+    QLabel* winLab = new QLabel(this);
+    QPixmap winPix;
+    winPix.load(":/res/LevelCompletedDialogBg.png");
+    winLab->setFixedSize(winPix.size());
+    winLab->setPixmap(winPix);
+    winLab->move((width() - winPix.width()) * 0.5, -winPix.height());
 
     cDataConfig dataConfig;
     if (dataConfig.m_data.find(m_levelIndex) == dataConfig.m_data.end())
@@ -49,6 +60,7 @@ void cPlayScene::Init()
             coinBgLab->setPixmap(QPixmap(":/res/BoardNode.png"));
 
             cCoinBtn *coinBtn = new cCoinBtn(this);
+            m_coinBtnArr[i][j] = coinBtn;
             if(m_arr[i][j])
             {
                 coinBtn->SetPix(":/res/Coin0001.png");
@@ -58,6 +70,48 @@ void cPlayScene::Init()
                 coinBtn->SetPix(":/res/Coin0008.png");
             }
             coinBtn->setGeometry(59 + i * 50, 204 + j * 50, 50, 50);
+            coinBtn->m_posX = i;
+            coinBtn->m_posY = j;
+            coinBtn->m_flag = m_arr[i][j];
+            connect(coinBtn, &cCoinBtn::clicked, this, [=](){
+                if (m_isWin) return;
+
+                conflipSound->stop();
+                conflipSound->play();
+
+                coinBtn->ChangeFlag();
+                if (coinBtn->m_posX + 1 <= 3) m_coinBtnArr[coinBtn->m_posX + 1][coinBtn->m_posY]->ChangeFlag();
+                if (coinBtn->m_posX - 1 >= 0) m_coinBtnArr[coinBtn->m_posX - 1][coinBtn->m_posY]->ChangeFlag();
+                if (coinBtn->m_posY + 1 <= 3) m_coinBtnArr[coinBtn->m_posX][coinBtn->m_posY + 1]->ChangeFlag();
+                if (coinBtn->m_posY - 1 >= 0) m_coinBtnArr[coinBtn->m_posX][coinBtn->m_posY - 1]->ChangeFlag();
+
+                m_isWin = true;
+                for (int i = 0; i < 4; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        if (m_coinBtnArr[i][j]->m_flag == false)
+                        {
+                            m_isWin = false;
+                            break;
+                        }
+                    }
+                }
+                if (m_isWin)
+                {
+                    QPropertyAnimation* animation = new QPropertyAnimation(winLab, "geometry");
+                    animation->setDuration(1000);
+                    animation->setStartValue(winLab->geometry());
+                    QRect endValue = winLab->geometry();
+                    endValue.setY(-winLab->y());
+                    animation->setEndValue(endValue);
+                    animation->setEasingCurve(QEasingCurve::OutBounce);
+                    animation->start();
+
+                    conflipSound->stop();
+                    winSound->play();
+                }
+            });
         }
     }
 }

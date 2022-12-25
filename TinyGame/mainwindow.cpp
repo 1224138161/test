@@ -23,11 +23,15 @@ void MainWindow::setMainWindow()
     setWindowIcon(QIcon(":/res/Coin0001.png"));
     setWindowTitle("CoinFlip");
 
+    QSound* startSound = new QSound(":/res/TapButtonSound.wav", this);
+    QSound* backSound = new QSound(":/res/BackButtonSound.wav", this);
+
     CMyPushbutton *pushbutton_start = new CMyPushbutton(this, ":/res/MenuSceneStartButton.png");
     pushbutton_start->move(this->width() * 0.5 - pushbutton_start->width() * 0.5, this->height() * 0.7);
 
     CChooseLevelScene *window_levelScene = new CChooseLevelScene();
     connect(pushbutton_start, &CMyPushbutton::clicked, this, [=](){
+        startSound->play();
         pushbutton_start->Zoom();
         QTimer::singleShot(200, this, [=](){
             window_levelScene->setGeometry(geometry());
@@ -36,6 +40,8 @@ void MainWindow::setMainWindow()
         });
     });
     connect(window_levelScene, &CChooseLevelScene::Sig_back, this, [=](){
+        backSound->play();
+
         setGeometry(window_levelScene->geometry());
         show();
         window_levelScene->close();
