@@ -9,5 +9,7 @@
 #include <QTimer>
 #include <QVector>
 #include <QMap>
+#include <QMouseEvent>
+#include <QSound>
 
 #endif // INCLUDE_H

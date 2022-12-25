@@ -22,6 +22,9 @@ private:
     CMyPushbutton       *m_backBtn;
     int m_levelIndex;
     int m_arr[4][4];
+    cCoinBtn* m_coinBtnArr[4][4];
+    // 是否胜利
+    bool m_isWin;
 signals:
     void Sig_back();
 };
